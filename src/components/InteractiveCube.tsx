@@ -431,7 +431,7 @@ export default function InteractiveCube() {
     return (
       <div
         key={`${cubie.id}-${isGhost}`}
-        ref={(el) => (refArray[index] = el)}
+        ref={(el) => { refArray[index] = el; }}
         className="absolute w-[80px] h-[80px] -ml-[40px] -mt-[40px]"
         style={{
           transformStyle: "preserve-3d",

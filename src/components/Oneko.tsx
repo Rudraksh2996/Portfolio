@@ -4,9 +4,7 @@ import { useEffect } from "react";
 
 export default function Oneko() {
   useEffect(() => {
-    const isReducedMotion =
-      window.matchMedia(`(prefers-reduced-motion: reduce)`) === true ||
-      window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+    const isReducedMotion = window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
 
     if (isReducedMotion || document.getElementById("oneko-wrapper")) return;
 
@@ -19,11 +17,11 @@ export default function Oneko() {
 
     let frameCount = 0;
     let idleTime = 0;
-    let idleAnimation = null;
+    let idleAnimation: string | null = null;
     let idleAnimationFrame = 0;
 
     const nekoSpeed = 10;
-    const spriteSets = {
+    const spriteSets: Record<string, number[][]> = {
       idle: [[-3, -3]],
       alert: [[-7, -3]],
       scratchSelf: [
@@ -152,9 +150,9 @@ export default function Oneko() {
       window.requestAnimationFrame(onAnimationFrame);
     }
 
-    let lastFrameTimestamp;
+    let lastFrameTimestamp: number | undefined;
 
-    function onAnimationFrame(timestamp) {
+    function onAnimationFrame(timestamp: number) {
       const wrapper = document.getElementById("oneko-wrapper");
       if (!wrapper) return;
       
@@ -168,7 +166,7 @@ export default function Oneko() {
       window.requestAnimationFrame(onAnimationFrame);
     }
 
-    function setSprite(name, frame) {
+    function setSprite(name: string, frame: number) {
       const sprite = spriteSets[name][frame % spriteSets[name].length];
       nekoEl.style.backgroundPosition = `${sprite[0] * 38}px ${sprite[1] * 38}px`;
     }
