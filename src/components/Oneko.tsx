@@ -20,6 +20,12 @@ export default function Oneko() {
     let idleAnimation: string | null = null;
     let idleAnimationFrame = 0;
 
+    let lastFrameTimestamp: number | undefined;
+    let lastInteractionTime = performance.now();
+    let isWandering = false;
+    let wanderTargetX = mousePosX;
+    let wanderTargetY = mousePosY;
+
     const nekoSpeed = 10;
     const spriteSets: Record<string, number[][]> = {
       idle: [[-3, -3]],
@@ -173,12 +179,6 @@ export default function Oneko() {
     }
 
     const { wrapper: elWrapper, clickHandler, mouseHandler, touchHandler, getFrameId, setFrameId } = init() || {};
-
-    let lastFrameTimestamp: number | undefined;
-    let lastInteractionTime = performance.now();
-    let isWandering = false;
-    let wanderTargetX = mousePosX;
-    let wanderTargetY = mousePosY;
 
     function onAnimationFrame(timestamp: number) {
       const wrapper = document.getElementById("oneko-wrapper");
