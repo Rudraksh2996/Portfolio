@@ -127,12 +127,13 @@ export default function Oneko() {
       wrapper.style.height = "38px";
       wrapper.style.zIndex = "999999";
       wrapper.style.pointerEvents = "none";
+      wrapper.className = "transition-all duration-300 dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]";
       
       wrapper.appendChild(nekoEl);
       wrapper.appendChild(speechBubble);
       document.body.appendChild(wrapper);
 
-      nekoEl.addEventListener("click", (e) => {
+      const clickHandler = (e: MouseEvent) => {
         e.stopPropagation();
         idleAnimation = "tamed";
         setSprite("alert", 0);
@@ -140,17 +141,44 @@ export default function Oneko() {
         setTimeout(() => {
           speechBubble.style.opacity = "0";
         }, 2000);
-      });
+      };
+      nekoEl.addEventListener("click", clickHandler);
 
-      document.addEventListener("mousemove", function (event) {
+      const mouseHandler = function (event: MouseEvent) {
         mousePosX = event.clientX;
         mousePosY = event.clientY;
-      });
+        lastInteractionTime = performance.now();
+      };
+      const touchHandler = function (event: TouchEvent) {
+        if (event.touches.length > 0) {
+          mousePosX = event.touches[0].clientX;
+          mousePosY = event.touches[0].clientY;
+          lastInteractionTime = performance.now();
+        }
+      };
+      document.addEventListener("mousemove", mouseHandler);
+      document.addEventListener("touchstart", touchHandler, { passive: true });
+      document.addEventListener("touchmove", touchHandler, { passive: true });
 
-      window.requestAnimationFrame(onAnimationFrame);
+      let frameId = window.requestAnimationFrame(onAnimationFrame);
+
+      return { 
+        wrapper, 
+        clickHandler, 
+        mouseHandler, 
+        touchHandler,
+        getFrameId: () => frameId, 
+        setFrameId: (id: number) => { frameId = id; } 
+      };
     }
 
+    const { wrapper: elWrapper, clickHandler, mouseHandler, touchHandler, getFrameId, setFrameId } = init() || {};
+
     let lastFrameTimestamp: number | undefined;
+    let lastInteractionTime = performance.now();
+    let isWandering = false;
+    let wanderTargetX = mousePosX;
+    let wanderTargetY = mousePosY;
 
     function onAnimationFrame(timestamp: number) {
       const wrapper = document.getElementById("oneko-wrapper");
@@ -163,7 +191,11 @@ export default function Oneko() {
         lastFrameTimestamp = timestamp;
         frame();
       }
-      window.requestAnimationFrame(onAnimationFrame);
+      if (setFrameId) {
+        setFrameId(window.requestAnimationFrame(onAnimationFrame));
+      } else {
+        window.requestAnimationFrame(onAnimationFrame);
+      }
     }
 
     function setSprite(name: string, frame: number) {
@@ -241,16 +273,25 @@ export default function Oneko() {
     function frame() {
       frameCount += 1;
       
-      let targetX = mousePosX;
-      let targetY = mousePosY;
+      const now = performance.now();
       
-      // Check if there is a global override for the cat's target (e.g. from the cube)
-      const globalTarget = (window as any).__onekoTarget;
-      if (globalTarget && globalTarget.active) {
-        targetX = globalTarget.x;
-        targetY = globalTarget.y;
+      // Wander logic: if no interaction for 3 seconds, pick a new random target nearby
+      if (now - lastInteractionTime > 3000) {
+        if (!isWandering) {
+          isWandering = true;
+          wanderTargetX = nekoPosX + (Math.random() - 0.5) * 200;
+          wanderTargetY = nekoPosY + (Math.random() - 0.5) * 200;
+          
+          // Constrain to viewport
+          wanderTargetX = Math.max(32, Math.min(window.innerWidth - 32, wanderTargetX));
+          wanderTargetY = Math.max(32, Math.min(window.innerHeight - 32, wanderTargetY));
+        }
+      } else {
+        isWandering = false;
       }
 
+      const targetX = isWandering ? wanderTargetX : mousePosX;
+      const targetY = isWandering ? wanderTargetY : mousePosY;
       const diffX = nekoPosX - targetX;
       const diffY = nekoPosY - targetY;
       const distance = Math.sqrt(diffX ** 2 + diffY ** 2);
@@ -259,6 +300,13 @@ export default function Oneko() {
       if (!wrapper) return;
 
       if (distance < nekoSpeed || distance < 48) {
+        if (isWandering && now - lastInteractionTime > 3000) {
+          // Re-trigger wander after a delay
+          if (Math.random() < 0.05) { // 5% chance per frame to pick new wander target once reached
+            isWandering = false; 
+            lastInteractionTime = now - 2000; // Force new target soon
+          }
+        }
         idle();
         return;
       }
@@ -295,6 +343,13 @@ export default function Oneko() {
     return () => {
       const wrapper = document.getElementById("oneko-wrapper");
       if (wrapper) wrapper.remove();
+      if (mouseHandler) document.removeEventListener("mousemove", mouseHandler);
+      if (touchHandler) {
+        document.removeEventListener("touchstart", touchHandler);
+        document.removeEventListener("touchmove", touchHandler);
+      }
+      const frameId = getFrameId?.();
+      if (frameId) window.cancelAnimationFrame(frameId);
     };
   }, []);
 

@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, Geist_Mono, Caveat, Geist } from "next/font/google";
+import { Plus_Jakarta_Sans, Playfair_Display, Geist_Mono, Caveat } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Oneko from "@/components/Oneko";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-const inter = Inter({
-  variable: "--font-inter",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
   subsets: ["latin"],
 });
 
@@ -29,7 +28,7 @@ const caveat = Caveat({
 
 export const metadata: Metadata = {
   title: "Rudraksh Sharma — Web Developer",
-  description: "Enthusiastic B.Tech IT student at KIET Group of Institutions with a strong foundation in Python, web development, and AWS Cloud.",
+  description: "Enthusiastic B.Tech IT student with a strong foundation in Python, web development, and AWS Cloud.",
 };
 
 export default function RootLayout({
@@ -40,12 +39,20 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", inter.variable, playfair.variable, geistMono.variable, caveat.variable, "font-sans", geist.variable)}
+      className={cn("h-full", "antialiased", plusJakartaSans.variable, playfair.variable, geistMono.variable, caveat.variable, "font-sans")}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
-        <Navbar />
-        {children}
-        <Oneko />
+      <body className="min-h-full flex flex-col bg-background text-foreground">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          {children}
+          <Oneko />
+        </ThemeProvider>
       </body>
     </html>
   );

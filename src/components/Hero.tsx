@@ -34,13 +34,13 @@ export default function Hero() {
             Available for opportunities
           </div>
           
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-black tracking-tight text-foreground leading-[1.1]">
+          <h1 className="heading-serif text-[36px] md:text-[60px] leading-[37.8px] md:leading-[60px] tracking-[-0.9px] md:tracking-[-1.5px] font-medium text-foreground">
             Hi, I'm <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-500">Rudraksh Sharma</span>
           </h1>
           
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed">
-            Aspiring Web Developer | Python Enthusiast | B.Tech IT @ KIET
+          <p className="text-[12px] md:text-[14px] leading-[16px] md:leading-[20px] font-semibold tracking-[0.6px] md:tracking-[0.7px] uppercase text-foreground max-w-lg">
+            Aspiring Web Developer | Python Enthusiast | B.Tech IT
           </p>
           
           <div className="flex flex-wrap items-center gap-4 mt-4">
@@ -61,7 +61,7 @@ export default function Hero() {
           </div>
 
           <div className="flex items-center gap-4 mt-6">
-            <a href="mailto:rudrakshsharma2026@gmail.com" className="p-2 text-muted-foreground hover:text-foreground transition-colors" aria-label="Email">
+            <a href="mailto:sharmarudraksh840@gmail.com" className="p-2 text-muted-foreground hover:text-foreground transition-colors" aria-label="Email">
               <Mail size={24} />
             </a>
             <a href="https://github.com/Rudraksh2996" target="_blank" rel="noreferrer" className="p-2 text-muted-foreground hover:text-foreground transition-colors" aria-label="GitHub">
@@ -74,7 +74,9 @@ export default function Hero() {
         </div>
 
         {/* 3D Sketchy Cube */}
-        <div className="flex justify-center lg:justify-end z-10 w-full h-[300px] md:h-[400px] pointer-events-auto">
+        <div className="flex justify-center lg:justify-end z-10 w-full h-[300px] md:h-[400px] pointer-events-auto relative">
+          {/* Subtle glow for dark mode to frame the light cube */}
+          <div className="absolute top-1/2 right-1/2 translate-x-1/2 lg:translate-x-0 lg:right-24 -translate-y-1/2 w-64 h-64 bg-white/10 blur-3xl rounded-full pointer-events-none transition-opacity opacity-0 dark:opacity-100 mix-blend-screen" />
           <InteractiveCube />
         </div>
       </div>

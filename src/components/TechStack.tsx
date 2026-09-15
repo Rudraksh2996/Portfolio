@@ -27,12 +27,12 @@ export default function TechStack() {
   return (
     <section id="tech" className="page-section py-24 px-6 sm:px-12 bg-transparent border-b border-border">
       <div className="max-w-6xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent-foreground font-medium mb-8">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent-foreground text-[12px] md:text-[14px] leading-[16px] md:leading-[20px] font-semibold tracking-[0.6px] md:tracking-[0.7px] uppercase mb-8">
           <Cloud size={20} />
           <span>Technical Arsenal</span>
         </div>
         
-        <h2 className="text-4xl sm:text-5xl font-serif font-black tracking-tight text-foreground mb-16">
+        <h2 className="heading-serif text-[24px] md:text-[36px] leading-[28.8px] md:leading-[40px] tracking-[-0.6px] md:tracking-[-0.9px] font-medium text-foreground mb-16">
           Tools & <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-500">Technologies</span>
         </h2>
 
@@ -43,14 +43,14 @@ export default function TechStack() {
                 <div className="p-3 bg-accent/10 rounded-xl">
                   {category.icon}
                 </div>
-                <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
+                <h3 className="heading-serif text-[24px] md:text-[30px] leading-[32px] md:leading-[36px] font-medium text-foreground">{category.title}</h3>
               </div>
               
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill, skillIndex) => (
                   <span 
                     key={skillIndex} 
-                    className="px-4 py-2 bg-background border border-border rounded-full text-sm font-medium text-muted-foreground hover:border-accent hover:text-foreground transition-colors cursor-default"
+                    className="px-4 py-2 bg-background border border-border rounded-full text-[14px] leading-[20px] font-medium text-foreground hover:border-accent transition-colors cursor-default"
                   >
                     {skill}
                   </span>

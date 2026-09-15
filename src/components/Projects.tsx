@@ -30,11 +30,11 @@ export default function Projects() {
     <section id="projects" className="page-section py-24 px-6 sm:px-12 bg-transparent border-b border-border">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col items-start gap-4 mb-16">
-          <h2 className="text-4xl sm:text-5xl font-serif font-black tracking-tight text-foreground">
+          <h2 className="heading-serif text-[24px] md:text-[36px] leading-[28.8px] md:leading-[40px] tracking-[-0.6px] md:tracking-[-0.9px] font-medium text-foreground">
             Selected <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-500">Works</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl">
+          <p className="text-[12px] md:text-[14px] leading-[16px] md:leading-[20px] font-normal text-muted-foreground max-w-2xl">
             A showcase of my recent projects focusing on real-time collaboration, full-stack architecture, and seamless user experiences.
           </p>
         </div>
@@ -64,17 +64,17 @@ export default function Projects() {
                   </div>
                 </div>
                 
-                <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-accent-foreground transition-colors">
+                <h3 className="heading-serif text-[24px] md:text-[30px] leading-[32px] md:leading-[36px] font-medium text-foreground mb-3 group-hover:text-accent-foreground transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed mb-8">
+                <p className="text-[12px] md:text-[14px] leading-[16px] md:leading-[20px] font-normal text-muted-foreground mb-8">
                   {project.description}
                 </p>
               </div>
 
               <div className="flex flex-wrap items-center gap-2 mt-auto">
                 {project.tech.map((tech, techIndex) => (
-                  <span key={techIndex} className="px-3 py-1 text-xs font-medium font-mono text-muted-foreground bg-card border border-border rounded-full">
+                  <span key={techIndex} className="px-3 py-1 text-[14px] leading-[20px] font-medium text-foreground bg-card border border-border rounded-full">
                     {tech}
                   </span>
                 ))}

@@ -220,6 +220,7 @@ export default function InteractiveCube() {
 
       if (cubeWrapperRef.current) {
         cubeWrapperRef.current.style.transform = `translate3d(0, ${floatY}px, ${(-170 + floatZ) * C}px) rotateX(${finalRotX}deg) rotateY(${finalRotY}deg) rotateZ(${finalRotZ}deg)`;
+        cubeWrapperRef.current.style.pointerEvents = C > 0.05 ? "none" : "auto";
       }
 
       const spacingScale = (isMobile ? 65 : 100) * 0.8 * C;
@@ -372,31 +373,7 @@ export default function InteractiveCube() {
         }
       }
       
-      // Update Oneko Anchor Position (the cat moves to the top of a settled cube)
-      if (C > 0.8) {
-        const targetCube = cubieRefs.current[12];
-        const wrapper = document.getElementById("oneko-wrapper");
-        if (targetCube && wrapper) {
-            const rect = targetCube.getBoundingClientRect();
-            // Tell Oneko.tsx to target this position
-            (window as any).__onekoTarget = {
-              active: true,
-              x: rect.left + rect.width / 2,
-              y: rect.top - 1
-            };
-            
-            // Trigger sitting glow
-            wrapper.style.boxShadow = "0 0 20px 10px rgba(255, 255, 255, 0.4)";
-            wrapper.style.borderRadius = "50%";
-        }
-      } else {
-        (window as any).__onekoTarget = { active: false };
-        const wrapper = document.getElementById("oneko-wrapper");
-        if (wrapper) {
-            wrapper.style.boxShadow = "none";
-            wrapper.style.borderRadius = "0";
-        }
-      }
+      // Cat anchor logic removed as requested
 
       animationFrameId = requestAnimationFrame(loop);
     };
@@ -463,8 +440,8 @@ export default function InteractiveCube() {
         <div ref={containerRef} className="absolute w-[10px] h-[10px] transform-gpu">
           <div 
             ref={cubeWrapperRef} 
-            className="absolute transform-gpu pointer-events-auto cursor-grab active:cursor-grabbing w-[160px] h-[160px] -ml-[80px] -mt-[80px]" 
-            style={{ transformStyle: "preserve-3d", touchAction: "none" }}
+            className="absolute transform-gpu cursor-grab active:cursor-grabbing w-[160px] h-[160px] -ml-[80px] -mt-[80px]" 
+            style={{ transformStyle: "preserve-3d", touchAction: "none", pointerEvents: "auto" }}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
