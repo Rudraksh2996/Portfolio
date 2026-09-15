@@ -338,7 +338,7 @@ export default function Oneko() {
       wrapper.style.top = `${nekoPosY - 19}px`;
     }
 
-    init();
+
 
     return () => {
       const wrapper = document.getElementById("oneko-wrapper");
