@@ -2,7 +2,7 @@ import { User } from "lucide-react";
 
 export default function About() {
   return (
-    <section id="about" className="page-section min-h-screen py-24 px-6 sm:px-12 flex flex-col justify-center items-center text-center bg-transparent">
+    <section id="about" className="page-section py-24 px-6 sm:px-12 flex flex-col justify-center items-center text-center bg-transparent">
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="inline-flex items-center justify-center p-4 bg-accent/10 text-accent-foreground rounded-full mb-8">
           <User size={32} />

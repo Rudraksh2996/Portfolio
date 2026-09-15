@@ -12,7 +12,7 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 py-4 px-6 sm:px-12 flex items-center justify-between pointer-events-none">
       <Link 
         href="#hero" 
-        className="pointer-events-auto text-lg font-medium tracking-tight text-foreground hover:opacity-75 transition-opacity rounded-full bg-[#F4F4F2]/80 backdrop-blur-md px-2.5 py-1 border border-border"
+        className="pointer-events-auto text-lg font-medium tracking-tight text-foreground hover:opacity-75 transition-opacity rounded-full bg-card/90 backdrop-blur-md px-2.5 py-1 border border-border shadow-sm"
         aria-label="Rudraksh Sharma home"
         onClick={() => setIsOpen(false)}
       >
