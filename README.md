@@ -1,11 +1,11 @@
 # Rudraksh Sharma — Portfolio
 A personal portfolio website showcasing my projects, skills, and background as a B.Tech Information Technology student and aspiring web developer.
 
-Live site: add your deployed Vercel URL here  
+Live site: [portfolio-rs-zeta.vercel.app](https://portfolio-rs-zeta.vercel.app)  
 GitHub: [github.com/Rudraksh2996](https://github.com/Rudraksh2996)
 
 ## About
-I'm Rudraksh Sharma, a B.Tech Information Technology student at KIET Group of Institutions (2024–2028), with a foundation in Python, web development, and AWS cloud fundamentals. This site is my personal portfolio — built to showcase my projects, technical skills, and background as I look toward a Summer 2026 Web Development Internship.
+I'm Rudraksh Sharma, a B.Tech Information Technology student (2024–2028), with a foundation in Python, web development, and AWS cloud fundamentals. This site is my personal portfolio — built to showcase my projects, technical skills, and background as I look toward a Summer 2026 Web Development Internship.
 
 ## Features
 - Interactive 3D cube in the hero section — drag to rotate, with idle auto-rotation and a scroll-triggered scatter/burst animation
@@ -43,7 +43,7 @@ Run the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to view the site.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the site locally. Alternatively, view the live deployed site at [portfolio-rs-zeta.vercel.app](https://portfolio-rs-zeta.vercel.app).
 
 Build
 ```bash
