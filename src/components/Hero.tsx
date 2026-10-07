@@ -1,12 +1,14 @@
 "use client";
 
-import { Mail, FileText, ArrowRight } from "lucide-react";
+import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import InteractiveCube from "./InteractiveCube";
-import SlideTextButton from "./kokonutui/slide-text-button";
-import BackgroundPaths from "./kokonutui/background-paths";
+import { BackgroundLines } from "./ui/background-lines";
+import { ShootingStars } from "./ui/shooting-stars";
+import { StarsBackground } from "./ui/stars-background";
+import { HoverBorderGradient } from "./ui/hover-border-gradient";
 
 export default function Hero() {
   const { scrollYProgress } = useScroll();
@@ -16,48 +18,48 @@ export default function Hero() {
 
   return (
     <section id="hero" className="page-section relative min-h-screen flex items-center justify-center overflow-hidden px-6 sm:px-12 pt-20">
-      {/* Background blobs and subtle motion paths */}
-      <div className="absolute inset-0 z-0 opacity-30 pointer-events-none mix-blend-multiply">
-        <BackgroundPaths title="" />
+      
+      {/* Background Effects */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="hidden dark:block absolute inset-0 z-0">
+          <ShootingStars />
+          <StarsBackground />
+        </div>
+        <BackgroundLines className="absolute inset-0 z-0 flex items-center justify-center opacity-30 dark:opacity-20"><div /></BackgroundLines>
       </div>
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent/10 rounded-full blur-[100px] -z-10" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] -z-10" />
 
-      <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center pointer-events-none">
+      <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center pointer-events-none z-10">
         {/* Text Content */}
-        <div className="flex flex-col items-start gap-6 z-10 pointer-events-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent-foreground text-sm font-medium">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-            </span>
+        <div className="flex flex-col items-start gap-6 pointer-events-auto">
+          <div className="inline-flex items-center gap-2 text-accent text-sm font-semibold uppercase tracking-wider">
             Available for opportunities
           </div>
           
-          <h1 className="heading-serif text-[36px] md:text-[60px] leading-[37.8px] md:leading-[60px] tracking-[-0.9px] md:tracking-[-1.5px] font-medium text-foreground">
-            Hi, I'm <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-500">Rudraksh Sharma</span>
+          <h1 className="font-sans text-[48px] md:text-[72px] leading-[1.1] tracking-tighter font-extrabold text-foreground">
+            Hi, I&apos;m <br />
+            <span className="text-accent dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-white dark:to-gray-500">Rudraksh Sharma</span>
           </h1>
           
-          <p className="text-[12px] md:text-[14px] leading-[16px] md:leading-[20px] font-semibold tracking-[0.6px] md:tracking-[0.7px] uppercase text-foreground max-w-lg">
+          <p className="text-[16px] md:text-[18px] leading-relaxed font-normal text-muted-foreground max-w-lg">
             Aspiring Web Developer | Python Enthusiast | B.Tech IT
           </p>
           
           <div className="flex flex-wrap items-center gap-4 mt-4">
-            <SlideTextButton 
-              href="#projects"
-              text="View My Work"
-              hoverText="See Projects"
-              variant="default"
-            />
+            <HoverBorderGradient
+              containerClassName="rounded-full"
+              as="button"
+              className="dark:bg-black bg-primary text-primary-foreground dark:text-white flex items-center space-x-2 px-6 py-2 rounded-full font-medium"
+            >
+              <Link href="#projects">View My Work</Link>
+            </HoverBorderGradient>
             
-            <SlideTextButton 
+            <Link 
               href="/resume.pdf"
-              text="Resume"
-              hoverText="Download PDF"
-              variant="ghost"
               target="_blank"
-            />
+              className="px-6 py-2 rounded-full border border-border bg-card text-foreground font-medium hover:bg-muted/30 transition-colors"
+            >
+              Resume
+            </Link>
           </div>
 
           <div className="flex items-center gap-4 mt-6">
@@ -74,9 +76,7 @@ export default function Hero() {
         </div>
 
         {/* 3D Sketchy Cube */}
-        <div className="flex justify-center lg:justify-end z-10 w-full h-[300px] md:h-[400px] pointer-events-auto relative">
-          {/* Subtle glow for dark mode to frame the light cube */}
-          <div className="absolute top-1/2 right-1/2 translate-x-1/2 lg:translate-x-0 lg:right-24 -translate-y-1/2 w-64 h-64 bg-white/10 blur-3xl rounded-full pointer-events-none transition-opacity opacity-0 dark:opacity-100 mix-blend-screen" />
+        <div className="flex justify-center lg:justify-end z-20 w-full h-[300px] md:h-[400px] pointer-events-auto relative">
           <InteractiveCube />
         </div>
       </div>

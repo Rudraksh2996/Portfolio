@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Playfair_Display, Geist_Mono, Caveat } from "next/font/google";
+import { Inter, Geist_Mono, Caveat } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Oneko from "@/components/Oneko";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
-  subsets: ["latin"],
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -39,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", plusJakartaSans.variable, playfair.variable, geistMono.variable, caveat.variable, "font-sans")}
+      className={cn("h-full", "antialiased", inter.variable, geistMono.variable, caveat.variable, "font-sans")}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
