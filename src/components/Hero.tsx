@@ -17,7 +17,7 @@ export default function Hero() {
   const cubeScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.8]);
 
   return (
-    <section id="hero" className="page-section relative min-h-screen flex items-center justify-center overflow-hidden px-6 sm:px-12 pt-20">
+    <section id="hero" className="page-section relative min-h-[100dvh] flex items-center justify-center overflow-hidden px-6 sm:px-12 pt-28 pb-12 lg:pt-20 lg:pb-0">
       
       {/* Background Effects */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -28,19 +28,19 @@ export default function Hero() {
         <BackgroundLines className="absolute inset-0 z-0 flex items-center justify-center opacity-30 dark:opacity-20"><div /></BackgroundLines>
       </div>
 
-      <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center pointer-events-none z-10">
+      <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center pointer-events-none z-10">
         {/* Text Content */}
-        <div className="flex flex-col items-start gap-6 pointer-events-auto">
-          <div className="inline-flex items-center gap-2 text-accent text-sm font-semibold uppercase tracking-wider">
+        <div className="flex flex-col items-start gap-5 pointer-events-auto mt-4 lg:mt-0">
+          <div className="inline-flex items-center gap-2 text-accent text-xs sm:text-sm font-semibold uppercase tracking-wider">
             Available for opportunities
           </div>
           
-          <h1 className="font-sans text-[48px] md:text-[72px] leading-[1.1] tracking-tighter font-extrabold text-foreground">
+          <h1 className="font-sans text-[40px] sm:text-[48px] md:text-[72px] leading-[1.1] tracking-tighter font-extrabold text-foreground">
             Hi, I&apos;m <br />
             <span className="text-accent dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-white dark:to-gray-500">Rudraksh Sharma</span>
           </h1>
           
-          <p className="text-[16px] md:text-[18px] leading-relaxed font-normal text-muted-foreground max-w-lg">
+          <p className="text-[14px] sm:text-[16px] md:text-[18px] leading-relaxed font-normal text-muted-foreground max-w-lg">
             Aspiring Web Developer | Python Enthusiast | B.Tech IT
           </p>
           
@@ -76,7 +76,7 @@ export default function Hero() {
         </div>
 
         {/* 3D Sketchy Cube */}
-        <div className="flex justify-center lg:justify-end z-20 w-full h-[300px] md:h-[400px] pointer-events-auto relative">
+        <div className="flex justify-center lg:justify-end z-20 w-full h-[250px] sm:h-[300px] md:h-[400px] pointer-events-auto relative mt-4 lg:mt-0">
           <InteractiveCube />
         </div>
       </div>
